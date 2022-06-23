@@ -1,0 +1,21 @@
+version: '3'
+services:
+  datebase:
+    image: mongo
+    container_name: mongo-db-docker
+    networks: 
+    - mongo-network
+    environment:
+      - MONGO_INITDB_DATABASE=depo
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - 27017:27017
+  mongodb-docker-app:
+    networks: 
+    - mongo-network
+    build: mongodb-docker-app/
+networks:
+  mongo-network:
+    name: mongo_docker_net
+    driver: bridge
